@@ -30,16 +30,20 @@ describe Board do
 
   it 'can report if not all ships are sunk' do
     ship = double :ship, position: "A1"
-    subject.place "B2"
+    subject.place ship
     expect(subject.all_sunk?).to eq false
   end
 
   it 'does not allow ships to overlap' do
-    ship = double :ship
-    allow(ship).to receive(:position) { 'A1'}
+    ship = double :ship, position: 'A1'
     subject.place ship
     expect{subject.place ship}.to raise_error "Position Occupied"
   end
 
+  it 'can receive a hit on a ship' do
+    ship = double :ship, position: 'A1'
+    subject.place ship
+    expect{subject.strike 'A1'}.to eq :hit
+  end
 
 end

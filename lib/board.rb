@@ -29,7 +29,7 @@ class Board
   end
 
   def place ship
-    if (@ships.collect {|x| x.positon}.include?(ship.position)) 
+    if (@ships.collect {|x| x.position}.include?(ship.position)) 
       fail "Position Occupied"
     else
       @ships << ship
@@ -44,19 +44,20 @@ class Board
   #   end 
   #   end
 
+
   def strike position
     if (@ships.collect{|x| x.position}.include?(position)) 
       report_hit position
-      :hit
     else
       report_miss position
       :miss
-    end
-     # 
+    end 
   end
-  
+ 
   def report_hit position
     @hits << @ships.delete_at(@ships.index { |ship| position })
+    ship.hit
+      :hit
   end
 
   def report_miss position
