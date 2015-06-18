@@ -11,7 +11,7 @@ class Player
 	end
 
 	def lose
-	  :lose
+	  "lose"
 	end
 
 	def place ship, position, direction

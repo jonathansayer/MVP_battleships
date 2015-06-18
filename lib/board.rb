@@ -10,6 +10,7 @@ class Board
    @ships = []
    @hits = []
    @misses = []
+   @positions = []
 
    # #          A   B   C   D   E   F   G   H   I   J
    # @grid = [['w','w','w','w','w','w','w','w','w','w'],
@@ -28,8 +29,20 @@ class Board
   end
 
   def place ship
-    @ships << ship
+    if (@ships.collect {|x| x.positon}.include?(ship.position)) 
+      fail "Position Occupied"
+    else
+      @ships << ship
+    end
   end
+
+  # def overlap? position1, position2
+  #   if  position1 == position2
+  #     true
+  #   else 
+  #     false
+  #   end 
+  #   end
 
   def strike position
     if (@ships.collect{|x| x.position}.include?(position)) 

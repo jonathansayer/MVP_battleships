@@ -34,4 +34,12 @@ describe Board do
     expect(subject.all_sunk?).to eq false
   end
 
+  it 'does not allow ships to overlap' do
+    ship = double :ship
+    allow(ship).to receive(:position) { 'A1'}
+    subject.place ship
+    expect{subject.place ship}.to raise_error "Position Occupied"
+  end
+
+
 end
